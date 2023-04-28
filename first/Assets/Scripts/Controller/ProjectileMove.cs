@@ -24,9 +24,25 @@ public class ProjectileMove : MonoBehaviour
             Destroy(temp);                  //곧바로 파괴한다.
         } 
         
-        if (collision.gameObject.name == "Monster")
+        if (collision.gameObject.tag == "Monster")
         {
             collision.gameObject.GetComponent<MonsterController>().Monster_Damaged(1);
+            GameObject temp = this.gameObject;          //나 자신을 가져와서 temp에 입력한다
+            Destroy(temp);                  //곧바로 파괴한다.
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Wall")
+        {
+            GameObject temp = this.gameObject;          //나 자신을 가져와서 temp에 입력한다
+            Destroy(temp);                  //곧바로 파괴한다.
+        }
+
+        if (other.gameObject.tag == "Monster")
+        {
+            other.gameObject.GetComponent<MonsterController>().Monster_Damaged(1);
             GameObject temp = this.gameObject;          //나 자신을 가져와서 temp에 입력한다
             Destroy(temp);                  //곧바로 파괴한다.
         }
